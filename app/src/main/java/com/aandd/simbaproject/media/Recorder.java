@@ -3,7 +3,7 @@ package com.aandd.simbaproject.media;
 import java.io.IOException;
 
 import com.aandd.simbaproject.activity.MainActivity;
-import com.aandd.simbaproject.utility.FileName;
+import com.aandd.simbaproject.utility.FileUtil;
 
 import android.media.MediaRecorder;
 import android.widget.Toast;
@@ -17,22 +17,24 @@ public class Recorder {
 	private double ampiezza;
 	
 	private MainActivity ma;
-	
+
+    //TODO
 	public void setAmpiezza(double ampiezza){
 		this.ampiezza = ampiezza;
 	}
 
+    //TODO
 	public double getAmpiezza(){
 		return ampiezza;
 	}
 	
-//	parte registrazione e salva file (OK)
+	//parte registrazione e salva file (OK)
 	public void startRecording() {
 	    recorder = new MediaRecorder();
 	    recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
 	    recorder.setOutputFormat(output_formats[currentFormat]);
 	    recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-	    recorder.setOutputFile(FileName.getFullFileName());
+	    recorder.setOutputFile(FileUtil.getFullFileName());
 	    recorder.setOnErrorListener(errorListener);
 	    recorder.setOnInfoListener(infoListener);
 	    try {
@@ -45,7 +47,8 @@ public class Recorder {
 	        e.printStackTrace();
 	    }
 	}
-//	stop registrazione (OK)
+
+	//	stop registrazione (OK)
 	public void stopRecording() {
 		try{
 	    if (null != recorder) {
@@ -55,13 +58,15 @@ public class Recorder {
 	        recorder.reset();
 	        recorder.release();
 	        recorder = null;
-	    } 
+	        }
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			Toast.makeText(ma.getApplicationContext(), "Non è stato possibile effettuare la registrazione", Toast.LENGTH_SHORT).show();
+			Toast.makeText(ma.getApplicationContext(), "Non Ã¨ stato possibile effettuare la registrazione", Toast.LENGTH_SHORT).show();
 		}
 	}
+
+    //TODO
 	// registra la max ampiezza (NN FUNGE)
 	public double getAmplitude() {
 		double AmpiezzaDiRiferimento = 0.6;
@@ -84,6 +89,5 @@ public class Recorder {
 	        Toast.makeText(ma.getApplicationContext(), "Warning: " + what + ", " + extra, Toast.LENGTH_SHORT).show();
 	    }
 	};
-	
-	
+
 }

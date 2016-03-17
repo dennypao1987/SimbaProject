@@ -1,10 +1,9 @@
 package com.aandd.simbaproject.activity;
 
 import com.aandd.simbaproject.db.DBManager;
-import com.aandd.simbaproject.db.DBStrings;
 import com.aandd.simbaproject.media.Play;
 import com.aandd.simbaproject.media.Recorder;
-import com.aandd.simbaproject.utility.FileName;
+import com.aandd.simbaproject.utility.FileUtil;
 import com.example.simbaproject.R;
 
 import android.app.Fragment;
@@ -16,14 +15,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import android.database.Cursor;
 
 
 public class HomeFragment extends Fragment implements OnClickListener{
 	
 	private static final String STRING_BUTTON_START = "Spara il rutto";
 	private static final String STRING_BUTTON_STOP = "STOP";
-	private int currentString = 0;
+	private int currentString = 0;		// step 0: non in registrazione;
+										// step 1: in registrazione;
 	private String btnStr[] = { STRING_BUTTON_START, STRING_BUTTON_STOP };
 	
 	private DBManager db=null;	
@@ -33,7 +32,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
  
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_allrecord, container, false);
          
 		Button button1 = (Button) rootView.findViewById(R.id.btnStart);
 		button1.setOnClickListener(this);
@@ -54,7 +53,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
                 ((ImageButton) getView().findViewById(R.id.imgbtnPlay)).setVisibility(View.GONE);
                 
                 currentString=1;
-                FileName.setFullFileName();   
+                FileUtil.setFullFileName();
                 re.startRecording();
                }else{
             	Toast.makeText(this.getActivity(), R.string.stop_recording, Toast.LENGTH_SHORT).show();
@@ -70,7 +69,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
                 break;
             }
             case R.id.imgbtnPlay: 
-				Play.mediaPlay(FileName.getFullFileName());
+				Play.mediaPlay(FileUtil.getFullFileName());
 				Toast.makeText(this.getActivity(), "play", Toast.LENGTH_LONG).show();
 					break;        
         }
@@ -78,12 +77,12 @@ public class HomeFragment extends Fragment implements OnClickListener{
 
 //	public void addDB(){
 //		db = new DBManager(this); 
-//        db.save("Antonio", "23", Date.getDate(),FileName.getFullFileName() );
+//        db.save("Antonio", "23", Date.getDate(),FileUtil.getFullFileName() );
 //	}
 //	private void Fetch(){
 //		Cursor crs = db.query();
 //        crs.moveToFirst();
 //        String stringa = crs.getString(crs.getColumnIndex(DBStrings.FIELD_NAME));
-//        Toast.makeText(getActivity().getApplicationContext(), "Ciao " + stringa + ", oggi � il " + crs.getString(2) , Toast.LENGTH_LONG).show();
+//        Toast.makeText(getActivity().getApplicationContext(), "Ciao " + stringa + ", oggi è il " + crs.getString(2) , Toast.LENGTH_LONG).show();
 //	}	
 }

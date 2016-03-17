@@ -6,6 +6,7 @@ import com.aandd.simbaproject.db.DBManager;
 import com.aandd.simbaproject.drawer.adapter.NavDrawerListAdapter;
 import com.aandd.simbaproject.drawer.model.NavDrawerItem;
 
+import com.aandd.simbaproject.utility.FileUtil;
 import com.example.simbaproject.R;
 
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -65,11 +66,11 @@ public class MainActivity extends Activity{
 
 		// adding nav drawer items to array
 		// Home
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1),true, "21"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
 		// all records
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1),true, "18"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1),true, ((Integer) FileUtil.getNumberOfFiles()).toString()));
 		// about
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
+//		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
 		// Communities, Will add a counter here
 		
 		// Recycle the typed array
@@ -112,14 +113,14 @@ public class MainActivity extends Activity{
 	
 //	public void addDB(){
 //		db = new DBManager(this); 
-//        db.save("Antonio", "23", Date.getDate(),FileName.getFullFileName() );
+//        db.save("Antonio", "23", Date.getDate(),FileUtil.getFullFileName() );
 //	}
 	
 //	private void Fetch(){
 //		Cursor crs = db.query();
 //        crs.moveToFirst();
 //        String stringa = crs.getString(crs.getColumnIndex(DBStrings.FIELD_NAME));
-//        Toast.makeText(getApplicationContext(), "Ciao " + stringa + ", oggi è il " + crs.getString(2) , Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), "Ciao " + stringa + ", oggi Ã¨ il " + crs.getString(2) , Toast.LENGTH_LONG).show();
 //	}	
 //	eventi associati al click start registrazione
 	   
