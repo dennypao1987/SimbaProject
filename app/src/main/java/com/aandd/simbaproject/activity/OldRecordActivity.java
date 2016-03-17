@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class OldRecordActivity extends ListActivity{
 
@@ -27,6 +28,7 @@ public class OldRecordActivity extends ListActivity{
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 	    String item = (String) getListAdapter().getItem(position);
+		Toast.makeText(this, item, Toast.LENGTH_SHORT).show();
 	    Play.mediaPlay(FileUtil.getPath() + "/" + item);
 	}
 	

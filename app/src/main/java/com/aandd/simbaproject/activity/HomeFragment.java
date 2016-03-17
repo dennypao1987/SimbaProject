@@ -32,47 +32,47 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
  
-        View rootView = inflater.inflate(R.layout.fragment_allrecord, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
          
 		Button button1 = (Button) rootView.findViewById(R.id.btnStart);
 		button1.setOnClickListener(this);
 		ImageButton button2 = (ImageButton) rootView.findViewById(R.id.imgbtnPlay);
-		button2.setOnClickListener(this);     
+		button2.setOnClickListener(this);
         
         return rootView;
     }
-	
+
 	public void onClick(View v) {
-    	Recorder re = new Recorder();
-        switch (v.getId()) {
-            case R.id.btnStart: {	
-            	if(currentString==0){
+		Recorder re = new Recorder();
+		switch (v.getId()) {
+			case R.id.btnStart: {
+				if (currentString == 0) {
 //                Toast.makeText(this.getActivity(), R.string.start_recording, Toast.LENGTH_SHORT).show();
-                ((Button) v.findViewById(R.id.btnStart)).setText(btnStr[1]);
-                
-                ((ImageButton) getView().findViewById(R.id.imgbtnPlay)).setVisibility(View.GONE);
-                
-                currentString=1;
-                FileUtil.setFullFileName();
-                re.startRecording();
-               }else{
-            	Toast.makeText(this.getActivity(), R.string.stop_recording, Toast.LENGTH_SHORT).show();
-            	
-            	((Button) v.findViewById(R.id.btnStart)).setText(btnStr[0]);
-            	((ImageButton) getView().findViewById(R.id.imgbtnPlay)).setVisibility(View.VISIBLE);
-            	currentString=0;
-                re.stopRecording();
+					((Button) v.findViewById(R.id.btnStart)).setText(btnStr[1]);
+
+					((ImageButton) getView().findViewById(R.id.imgbtnPlay)).setVisibility(View.GONE);
+
+					currentString = 1;
+					FileUtil.setFullFileName();
+					re.startRecording();
+				} else {
+					Toast.makeText(this.getActivity(), R.string.stop_recording, Toast.LENGTH_SHORT).show();
+
+					((Button) v.findViewById(R.id.btnStart)).setText(btnStr[0]);
+					((ImageButton) getView().findViewById(R.id.imgbtnPlay)).setVisibility(View.VISIBLE);
+					currentString = 0;
+					re.stopRecording();
 //                String amp = String.valueOf(re.getAmpiezza());
 //                addDB();
 //                Fetch();
-                }
-                break;
-            }
-            case R.id.imgbtnPlay: 
+				}
+				break;
+			}
+			case R.id.imgbtnPlay:
 				Play.mediaPlay(FileUtil.getFullFileName());
 				Toast.makeText(this.getActivity(), "play", Toast.LENGTH_LONG).show();
-					break;        
-        }
+				break;
+		}
 	}
 
 //	public void addDB(){

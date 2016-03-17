@@ -70,7 +70,7 @@ public class MainActivity extends Activity{
 		// all records
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1),true, ((Integer) FileUtil.getNumberOfFiles()).toString()));
 		// about
-//		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
 		// Communities, Will add a counter here
 		
 		// Recycle the typed array
