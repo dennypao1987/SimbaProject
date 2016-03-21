@@ -15,15 +15,13 @@ public class Recorder {
 	private static int output_formats[] = { MediaRecorder.OutputFormat.MPEG_4, MediaRecorder.OutputFormat.THREE_GPP };
 	
 	private double ampiezza;
-	
+
 	private MainActivity ma;
 
-    //TODO
 	public void setAmpiezza(double ampiezza){
 		this.ampiezza = ampiezza;
 	}
 
-    //TODO
 	public double getAmpiezza(){
 		return ampiezza;
 	}

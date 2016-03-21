@@ -1,6 +1,6 @@
 package com.aandd.simbaproject.activity;
 
-import com.aandd.simbaproject.db.DBManager;
+//import com.aandd.simbaproject.db.DBManager;
 import com.aandd.simbaproject.media.Play;
 import com.aandd.simbaproject.media.Recorder;
 import com.aandd.simbaproject.utility.FileUtil;
@@ -25,7 +25,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 										// step 1: in registrazione;
 	private String btnStr[] = { STRING_BUTTON_START, STRING_BUTTON_STOP };
 	
-	private DBManager db=null;	
+//	private DBManager db=null;
 
 	public HomeFragment(){}
 	
@@ -49,15 +49,12 @@ public class HomeFragment extends Fragment implements OnClickListener{
 				if (currentString == 0) {
 //                Toast.makeText(this.getActivity(), R.string.start_recording, Toast.LENGTH_SHORT).show();
 					((Button) v.findViewById(R.id.btnStart)).setText(btnStr[1]);
-
 					((ImageButton) getView().findViewById(R.id.imgbtnPlay)).setVisibility(View.GONE);
-
 					currentString = 1;
 					FileUtil.setFullFileName();
 					re.startRecording();
 				} else {
 					Toast.makeText(this.getActivity(), R.string.stop_recording, Toast.LENGTH_SHORT).show();
-
 					((Button) v.findViewById(R.id.btnStart)).setText(btnStr[0]);
 					((ImageButton) getView().findViewById(R.id.imgbtnPlay)).setVisibility(View.VISIBLE);
 					currentString = 0;
@@ -73,6 +70,12 @@ public class HomeFragment extends Fragment implements OnClickListener{
 				Toast.makeText(this.getActivity(), "play", Toast.LENGTH_LONG).show();
 				break;
 		}
+		refreshDrawer();
+	}
+
+	public void refreshDrawer(){
+		MainActivity main = (MainActivity) getActivity();
+		main.refreshDraver();
 	}
 
 //	public void addDB(){

@@ -10,15 +10,17 @@ import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import static android.R.id.home;
 
 public class SettingsActivity extends ListActivity {
 
 	private static int currentFormat = 0;
-	private static int currentPath = 0;
 	private String[] items = new String[]{"Formato","Percorso","About"};
 	
 	private String[] getItems() {
@@ -30,10 +32,18 @@ public class SettingsActivity extends ListActivity {
 	    super.onCreate(savedInstanceState);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getItems());
 		setListAdapter(adapter);
-	    android.app.ActionBar actionBar = getActionBar();
-	    actionBar.setTitle(R.string.action_settings);
-	    actionBar.show();
-	    actionBar.setDisplayShowTitleEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case home:
+				NavUtils.navigateUpFromSameTask(this);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
 	}
 	
 	//apre activities (OK)
@@ -41,20 +51,25 @@ public class SettingsActivity extends ListActivity {
 		Intent intent = new Intent(getApplicationContext(),	activity);
 		startActivity(intent);	
 		}
-	
-	//crea il dialog per la scelta del path (OK)
+
+	//crea il dialog per la scelta del path//TODO
 	private void displayPathDialog() {
-		    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		    String path[] = { FileUtil.getAudioRecorderFolder() };
-		    builder.setTitle(getString(R.string.choose_path)).setSingleChoiceItems(path, currentPath, new DialogInterface.OnClickListener() {
-		         @Override
-		         public void onClick(DialogInterface dialog, int which) {
-		             currentPath = which;
-		             FileUtil.setCurrentFormat(which);
-		             dialog.dismiss();
-		         }
-		     }).show();
-		}
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder.setMessage("Le registrazioni verranno salvate in: " + FileUtil.getPath());
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		alertDialog.show();
+		//		    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//		    String path[] = { FileUtil.getAudioRecorderFolder() };
+//		    builder.setTitle(getString(R.string.choose_path)).setSingleChoiceItems(path, currentPath, new DialogInterface.OnClickListener() {
+//		         @Override
+//		         public void onClick(DialogInterface dialog, int which) {
+//		             currentPath = which;
+//					 //setPath()
+//		             dialog.dismiss();
+//		         }
+//		     }).show();
+//		}
+	}
 
 	//crea il dialog per la scelta del formato (OK)
 	private void displayFormatDialog() {

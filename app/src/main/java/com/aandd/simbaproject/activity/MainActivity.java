@@ -45,12 +45,52 @@ public class MainActivity extends Activity{
 
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
+
+	public ArrayList<NavDrawerItem> getNavDrawerItems() {
+		return navDrawerItems;
+	}
+
+	public void setNavDrawerItems(ArrayList<NavDrawerItem> navDrawerItems) {
+		this.navDrawerItems = navDrawerItems;
+	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_main);
 
+//		getActionBar().setDisplayShowTitleEnabled(false);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setHomeButtonEnabled(true);
+
+		createDrawer();
+
+		if (savedInstanceState == null) {
+			// on first time display view for first nav item
+			displayView(0);
+		}
+	}
+
+	public void refreshDraver(){
+		ArrayList<NavDrawerItem> items = navDrawerItems;
+		NavDrawerItem itemHome = items.get(0);
+		NavDrawerItem itemRec = items.get(1);
+		itemRec.setCount(((Integer) FileUtil.getNumberOfFiles()).toString());
+		NavDrawerItem itemAbout = items.get(2);
+
+		navDrawerItems.clear();
+
+		items.add(0, itemHome);
+		items.add(1, itemRec);
+		items.add(2, itemAbout);
+
+		navDrawerItems = items;
+
+		adapter = new NavDrawerListAdapter(getApplicationContext(),	navDrawerItems);
+		mDrawerList.setAdapter(adapter);
+	}
+
+	public void createDrawer(){
 		mTitle = mDrawerTitle = getTitle();
 
 		// load slide menu items
@@ -62,7 +102,8 @@ public class MainActivity extends Activity{
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 
-		navDrawerItems = new ArrayList<NavDrawerItem>();
+		if(navDrawerItems == null)
+			navDrawerItems = new ArrayList<NavDrawerItem>();
 
 		// adding nav drawer items to array
 		// Home
@@ -72,7 +113,7 @@ public class MainActivity extends Activity{
 		// about
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
 		// Communities, Will add a counter here
-		
+
 		// Recycle the typed array
 		navMenuIcons.recycle();
 
@@ -80,12 +121,8 @@ public class MainActivity extends Activity{
 //
 //		// setting the nav drawer list adapter
 		adapter = new NavDrawerListAdapter(getApplicationContext(),	navDrawerItems);
-		mDrawerList.setAdapter(adapter);		
-		
-//		getActionBar().setDisplayShowTitleEnabled(false);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setHomeButtonEnabled(true);
-		
+		mDrawerList.setAdapter(adapter);
+
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
 				R.drawable.ic_drawer, //nav menu toggle icon
 				R.string.app_name, // nav drawer open - description for accessibility
@@ -104,11 +141,6 @@ public class MainActivity extends Activity{
 			}
 		};
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-		if (savedInstanceState == null) {
-			// on first time display view for first nav item
-			displayView(0);
-		}
 	}
 	
 //	public void addDB(){

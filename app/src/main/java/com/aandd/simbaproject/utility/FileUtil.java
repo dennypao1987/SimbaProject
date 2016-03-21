@@ -82,5 +82,18 @@ public class FileUtil {
 		return path.listFiles().length;
 	}
 
+	//elimina il file
+	public static boolean deleteFile(String filename){
+		File filesList[] = path.listFiles();
+		if(filesList.length > 0) {
+			for(File file : filesList) {
+				if (file.getName().equalsIgnoreCase(filename))
+					if(file.delete())
+						return true;
+					else return false;
+					}
+			}return false;
+		}
+
 
 }

@@ -1,6 +1,5 @@
 package com.aandd.simbaproject.media;
 
-
 import com.aandd.simbaproject.activity.MainActivity;
 import com.example.simbaproject.R;
 
