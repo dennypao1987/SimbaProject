@@ -55,7 +55,7 @@ public class SettingsActivity extends ListActivity {
 	//crea il dialog per la scelta del path//TODO
 	private void displayPathDialog() {
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-		alertDialogBuilder.setMessage("Le registrazioni verranno salvate in: " + FileUtil.getPath());
+		alertDialogBuilder.setMessage("Le registrazioni verranno salvate in: " + FileUtil.getPath().getAbsolutePath());
 		AlertDialog alertDialog = alertDialogBuilder.create();
 		alertDialog.show();
 		//		    AlertDialog.Builder builder = new AlertDialog.Builder(this);

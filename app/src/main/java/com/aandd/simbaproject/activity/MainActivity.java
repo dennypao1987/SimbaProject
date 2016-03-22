@@ -45,21 +45,12 @@ public class MainActivity extends Activity{
 
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
-
-	public ArrayList<NavDrawerItem> getNavDrawerItems() {
-		return navDrawerItems;
-	}
-
-	public void setNavDrawerItems(ArrayList<NavDrawerItem> navDrawerItems) {
-		this.navDrawerItems = navDrawerItems;
-	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_main);
 
-//		getActionBar().setDisplayShowTitleEnabled(false);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 
@@ -77,34 +68,25 @@ public class MainActivity extends Activity{
 		NavDrawerItem itemRec = items.get(1);
 		itemRec.setCount(((Integer) FileUtil.getNumberOfFiles()).toString());
 		NavDrawerItem itemAbout = items.get(2);
-
 		navDrawerItems.clear();
-
 		items.add(0, itemHome);
 		items.add(1, itemRec);
 		items.add(2, itemAbout);
-
 		navDrawerItems = items;
-
 		adapter = new NavDrawerListAdapter(getApplicationContext(),	navDrawerItems);
 		mDrawerList.setAdapter(adapter);
 	}
 
 	public void createDrawer(){
 		mTitle = mDrawerTitle = getTitle();
-
 		// load slide menu items
 		navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
-
 		// nav drawer icons from resources
 		navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
-
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
-
 		if(navDrawerItems == null)
 			navDrawerItems = new ArrayList<NavDrawerItem>();
-
 		// adding nav drawer items to array
 		// Home
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
@@ -113,16 +95,12 @@ public class MainActivity extends Activity{
 		// about
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
 		// Communities, Will add a counter here
-
 		// Recycle the typed array
 		navMenuIcons.recycle();
-
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
-//
-//		// setting the nav drawer list adapter
+		// setting the nav drawer list adapter
 		adapter = new NavDrawerListAdapter(getApplicationContext(),	navDrawerItems);
 		mDrawerList.setAdapter(adapter);
-
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
 				R.drawable.ic_drawer, //nav menu toggle icon
 				R.string.app_name, // nav drawer open - description for accessibility

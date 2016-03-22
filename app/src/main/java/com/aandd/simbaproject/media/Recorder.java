@@ -6,6 +6,7 @@ import com.aandd.simbaproject.activity.MainActivity;
 import com.aandd.simbaproject.utility.FileUtil;
 
 import android.media.MediaRecorder;
+import android.util.Log;
 import android.widget.Toast;
 
 public class Recorder {
@@ -14,15 +15,15 @@ public class Recorder {
 	private static int currentFormat = 0;
 	private static int output_formats[] = { MediaRecorder.OutputFormat.MPEG_4, MediaRecorder.OutputFormat.THREE_GPP };
 	
-	private double ampiezza;
+	private int ampiezza;
 
 	private MainActivity ma;
 
-	public void setAmpiezza(double ampiezza){
+	public void setAmpiezza(int ampiezza){
 		this.ampiezza = ampiezza;
 	}
 
-	public double getAmpiezza(){
+	public int getAmpiezza(){
 		return ampiezza;
 	}
 	
@@ -38,7 +39,6 @@ public class Recorder {
 	    try {
 	        recorder.prepare();
 	        recorder.start();
-	        getAmpiezza();
 	    } catch (IllegalStateException e) {
 	        e.printStackTrace();
 	    } catch (IOException e) {
@@ -50,11 +50,10 @@ public class Recorder {
 	public void stopRecording() {
 		try{
 	    if (null != recorder) {
-	    	setAmpiezza(getAmplitude());
-//	        String total = String.valueOf(a);
 	        recorder.stop();
 	        recorder.reset();
 	        recorder.release();
+//			Toast.makeText(ma.getApplicationContext(), new Integer(ampiezza).toString(), Toast.LENGTH_SHORT).show();
 	        recorder = null;
 	        }
 		}
@@ -73,7 +72,7 @@ public class Recorder {
 		if (decibel < 0) { decibel = 0; }
 		return Ampiezza;
 		}
-	
+
 	private MediaRecorder.OnErrorListener errorListener = new MediaRecorder.OnErrorListener() {
 	    @Override
 	    public void onError(MediaRecorder mr, int what, int extra) {
