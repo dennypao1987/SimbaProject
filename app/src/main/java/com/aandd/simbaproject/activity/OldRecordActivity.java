@@ -19,6 +19,9 @@ import static android.R.id.home;
 
 public class OldRecordActivity extends ListActivity{
 
+	String result;
+	String[] temp = {"ciao","blu"};
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,7 +42,7 @@ public class OldRecordActivity extends ListActivity{
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 	    String item = (String) getListAdapter().getItem(position);
 		Toast.makeText(this, item, Toast.LENGTH_SHORT).show();
-//	    Play.mediaPlay(FileUtil.getPath() + "/" + item);
+	    Play.mediaPlay(FileUtil.getPath() + "/" + item);
 	}
 
 	//eliminazione file e refresh del fragment

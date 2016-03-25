@@ -42,7 +42,7 @@ public class AllRecordActivity extends ListActivity{
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		String item = (String) getListAdapter().getItem(position);
 		Toast.makeText(this, item, Toast.LENGTH_SHORT).show();
-		Play.mediaPlay(FileUtil.getPath() + "/" + item);
+//		Play.mediaPlay(FileUtil.getPath() + "/" + item);
 	}
 
 	//eliminazione file e refresh del fragment
