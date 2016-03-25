@@ -1,7 +1,16 @@
 package com.aandd.simbaproject.connect;
 
+import android.app.ListActivity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
+
+import com.aandd.simbaproject.activity.AllRecordActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -30,7 +39,6 @@ public class SelectAll extends AsyncTask<String,Void,String> {
         String parameters = "username="+(String)arg0[0]+"&password="+(String)arg0[1];
         String link="http://ilmagico.altervista.org/android/list.php";
         HttpURLConnection connection;
-
             try{
                 url = new URL(link);
                 connection = (HttpURLConnection)url.openConnection();
@@ -64,6 +72,24 @@ public class SelectAll extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result){
-           this.result = result;
+        String jsonParsed[];
+        JSONArray jsonArray;
+        JSONObject json;
+        try {
+            jsonArray = new JSONArray(result);
+            jsonParsed = new String[jsonArray.length()];
+            for(int i=0;i<jsonArray.length();i++){
+                json = (JSONObject) jsonArray.get(i);
+                jsonParsed[i] = json.get("fileName").toString();
+            }
+            ((AllRecordActivity) context).setRecordList(jsonParsed);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, jsonParsed);
+            ((AllRecordActivity) context).setListAdapter(adapter);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        this.result = result;
+
     }
 }

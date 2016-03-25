@@ -1,5 +1,6 @@
 package com.aandd.simbaproject.activity;
 
+import com.aandd.simbaproject.connect.SelectAll;
 import com.aandd.simbaproject.media.Play;
 import com.aandd.simbaproject.utility.FileUtil;
 
@@ -20,13 +21,18 @@ import static android.R.id.home;
 public class AllRecordActivity extends ListActivity{
 
 	String result;
-	String[] temp = {"ciao","blu"};
+	String[] recordList = {"ciao","blu"};
+
+	public void setRecordList(String[] recordList) { this.recordList = recordList; }
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, temp);
-		setListAdapter(adapter);
+		String user = "admin";
+		String password = "admin";
+ 		new SelectAll(this, result).execute(user, password);
+//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, recordList);
+//		setListAdapter(adapter);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
