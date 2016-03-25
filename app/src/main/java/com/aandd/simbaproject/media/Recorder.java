@@ -15,15 +15,15 @@ public class Recorder {
 	private static int currentFormat = 0;
 	private static int output_formats[] = { MediaRecorder.OutputFormat.MPEG_4, MediaRecorder.OutputFormat.THREE_GPP };
 	
-	private int ampiezza;
+	private double ampiezza;
 
 	private MainActivity ma;
 
-	public void setAmpiezza(int ampiezza){
+	public void setAmpiezza(double ampiezza){
 		this.ampiezza = ampiezza;
 	}
 
-	public int getAmpiezza(){
+	public double getAmpiezza(){
 		return ampiezza;
 	}
 	
@@ -39,6 +39,7 @@ public class Recorder {
 	    try {
 	        recorder.prepare();
 	        recorder.start();
+			ampiezza = getAmplitude();
 	    } catch (IllegalStateException e) {
 	        e.printStackTrace();
 	    } catch (IOException e) {
@@ -50,10 +51,11 @@ public class Recorder {
 	public void stopRecording() {
 		try{
 	    if (null != recorder) {
+//			Toast.makeText(ma.getApplicationContext(), new Integer(ampiezza).toString(), Toast.LENGTH_SHORT).show();
+			ampiezza = getAmplitude();
 	        recorder.stop();
 	        recorder.reset();
 	        recorder.release();
-//			Toast.makeText(ma.getApplicationContext(), new Integer(ampiezza).toString(), Toast.LENGTH_SHORT).show();
 	        recorder = null;
 	        }
 		}
@@ -63,15 +65,22 @@ public class Recorder {
 		}
 	}
 
+	public double getAmplitude() {
+		if (recorder != null)
+			return recorder.getMaxAmplitude();
+		else
+			return 0;
+	}
+
     //TODO
 	// registra la max ampiezza (NN FUNGE)
-	public double getAmplitude() {
-		double AmpiezzaDiRiferimento = 0.6;
-		double Ampiezza = recorder.getMaxAmplitude()/2700.0;
-		double decibel = 20 * Math.log10(Ampiezza / AmpiezzaDiRiferimento);
-		if (decibel < 0) { decibel = 0; }
-		return Ampiezza;
-		}
+//	public double getAmplitude() {
+//		double AmpiezzaDiRiferimento = 0.6;
+//		double Ampiezza = recorder.getMaxAmplitude()/2700.0;
+//		double decibel = 20 * Math.log10(Ampiezza / AmpiezzaDiRiferimento);
+//		if (decibel < 0) { decibel = 0; }
+//		return Ampiezza;
+//		}
 
 	private MediaRecorder.OnErrorListener errorListener = new MediaRecorder.OnErrorListener() {
 	    @Override

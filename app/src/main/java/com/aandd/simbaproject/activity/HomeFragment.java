@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 					((ImageButton) getView().findViewById(R.id.imgbtnPlay)).setVisibility(View.VISIBLE);
 					currentString = 0;
 					re.stopRecording();
-//                String amp = String.valueOf(re.getAmpiezza());
+					Toast.makeText(this.getActivity(),Double.toString(re.getAmpiezza()), Toast.LENGTH_LONG).show();
 //                addDB();
 //                Fetch();
 				}

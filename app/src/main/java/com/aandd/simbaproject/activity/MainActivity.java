@@ -156,6 +156,7 @@ public class MainActivity extends Activity{
         switch (item.getItemId()) {
         case R.id.action_oldrecord: callActivity(OldRecordActivity.class);return true;
         case R.id.action_settings: callActivity(SettingsActivity.class);return true;
+		case R.id.action_allrecord: callActivity(AllRecordActivity.class);return true;
         default:
             return super.onOptionsItemSelected(item);
         }

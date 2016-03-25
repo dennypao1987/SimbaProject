@@ -16,7 +16,7 @@
         
 <!-- Action Bar -->
  	<string name="action_settings">Settings</string>
-    <string name="action_oldrecord">vecchi rutti</string>
+    <string name="action_oldrecord">Tutte le registazioni</string>
     <string name="about">About</string>
 
 <!-- Activity/Fragment About -->

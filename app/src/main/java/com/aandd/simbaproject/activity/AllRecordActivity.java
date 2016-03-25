@@ -17,12 +17,15 @@ import android.widget.Toast;
 
 import static android.R.id.home;
 
-public class OldRecordActivity extends ListActivity{
+public class AllRecordActivity extends ListActivity{
+
+	String result;
+	String[] temp = {"ciao","blu"};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, FileUtil.getFilesName());
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, temp);
 		setListAdapter(adapter);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -34,12 +37,12 @@ public class OldRecordActivity extends ListActivity{
 			}
 		});
 	}
-	
+
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-	    String item = (String) getListAdapter().getItem(position);
+		String item = (String) getListAdapter().getItem(position);
 		Toast.makeText(this, item, Toast.LENGTH_SHORT).show();
-//	    Play.mediaPlay(FileUtil.getPath() + "/" + item);
+		Play.mediaPlay(FileUtil.getPath() + "/" + item);
 	}
 
 	//eliminazione file e refresh del fragment
@@ -76,5 +79,5 @@ public class OldRecordActivity extends ListActivity{
 				return super.onOptionsItemSelected(item);
 		}
 	}
-	
+
 }
