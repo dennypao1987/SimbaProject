@@ -1,10 +1,8 @@
 package com.aandd.simbaproject.connect;
 
-import android.app.ListActivity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import com.aandd.simbaproject.activity.AllRecordActivity;
 
@@ -17,6 +15,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 public class SelectAll extends AsyncTask<String,Void,String> {
 
@@ -42,21 +41,18 @@ public class SelectAll extends AsyncTask<String,Void,String> {
             try{
                 url = new URL(link);
                 connection = (HttpURLConnection)url.openConnection();
-//                parameters = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(user, "UTF-8");
-//                parameters += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+                parameters = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode((String)arg0[0], "UTF-8");
+                parameters += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode((String)arg0[1], "UTF-8");
                 connection.setDoOutput(true);
                 connection.setRequestMethod("POST");
-
                 request = new OutputStreamWriter(connection.getOutputStream());
                 request.write(parameters);
                 request.flush();
                 request.close();
-
                 String line = "";
                 InputStreamReader inputStreamReader = new InputStreamReader(connection.getInputStream());
                 BufferedReader reader = new BufferedReader(inputStreamReader);
                 StringBuilder sb = new StringBuilder();
-
                 while((line = reader.readLine()) != null)
                 {
                     sb.append(line);
@@ -88,8 +84,5 @@ public class SelectAll extends AsyncTask<String,Void,String> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        this.result = result;
-
     }
 }

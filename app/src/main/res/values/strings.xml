@@ -16,14 +16,15 @@
         
 <!-- Action Bar -->
  	<string name="action_settings">Settings</string>
-    <string name="action_oldrecord">Tutte le registazioni</string>
-    <string name="about">About</string>
+    <string name="action_oldrecord">Tutte le registrazioni</string>
+    <string name="action_allrecord">Tutte le registrazioni da web</string>
 
 <!-- Activity/Fragment About -->
     <string name="slogan">Goditi il tuo rutto, Enjoy your Burp!!</string>
    
 <!-- Activity/Fragment About -->
-    <string name="aboutText">Simba Project v0.5beta </string>
+    <string name="about">About</string>
+    <string name="aboutText">Simba Project v0.5beta</string>
     
 <!-- Fragments Home-->
     <string name="home">Home</string>
@@ -46,18 +47,4 @@
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
 
-    <!-- PROVA ALL RECORD FRAGMENT -->
-    <string-array name="Planets">
-        <item>Sun</item>
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
-    </string-array>
-
-    
 </resources>

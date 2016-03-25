@@ -12,7 +12,6 @@ import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,10 +30,7 @@ public class AllRecordActivity extends ListActivity{
 		String user = "admin";
 		String password = "admin";
  		new SelectAll(this, result).execute(user, password);
-//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, recordList);
-//		setListAdapter(adapter);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-
 		getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -48,7 +44,7 @@ public class AllRecordActivity extends ListActivity{
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		String item = (String) getListAdapter().getItem(position);
 		Toast.makeText(this, item, Toast.LENGTH_SHORT).show();
-//		Play.mediaPlay(FileUtil.getPath() + "/" + item);
+		Play.mediaPlay(FileUtil.getPath() + "/" + item);
 	}
 
 	//eliminazione file e refresh del fragment
